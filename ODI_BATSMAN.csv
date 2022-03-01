@@ -1,7 +1,38 @@
-create database cricket;
-show databases;
-
+create database cricket; 
 use cricket;
+show tables;
+
+create table ODI (
+PLAYER_ID varchar(20) primary key NOT NULL,
+PLAYER_NAME varchar(40) not null,
+SCORE int not NULL,
+AVG float NOT NULL,
+HALF_CENTURY int not NULL,
+DEBUTE_DATE date not null 
+);
+
+desc TABLE ODI;
+
+alter table ODI
+rename TO ODI_BATSMAN;
+RESULT-----
+13:03:40	alter table ODI rename TO ODI_BATSMAN	0 row(s) affected	1.532 sec
+
+alter table ODI_BATSMAN
+modify column DEBUTE_YEAR int;
+
+alter table ODI_BATSMAN
+rename column DEBUTE_DATE to DEBUTE_YEAR ;
+
+RESULT-----
+13:10:04	alter table ODI_BATSMAN rename column DEBUTE_DATE to DEBUTE_YEAR	0 row(s) affected Records: 0  Duplicates: 0  Warnings: 0	1.953 sec
+
+alter table ODI_BATSMAN
+add column CENTURY int NOT NULL
+AFTER AVG;
+RESULT-----
+13:14:52	alter table ODI_BATSMAN add column CENTURY int NOT NULL AFTER AVG	0 row(s) affected Records: 0  Duplicates: 0  Warnings: 0	4.750 sec
+
 show tables;
 
 RESULT-----
@@ -10,20 +41,16 @@ RESULT-----
 3.T20
 desc table ODI_BATSMAN;
 
-insert into ODI_BATSMAN(PLAYER_ID, PLAYER_NAME, SCORE,  CENTURY, HALF_CENTURY, DEBUT_DAY)
-VALUES (01, 'SACHIN', 32000,  53, 95, 5, '2000-02-25'),
-(02, 'DHONI', 15220,  13, 80, 11, '2004-02-25'),
-(03, 'KOHLI', 18220,  35, 50, 23, '2008-02-25'),
-(04, 'rOHIT', 13220,  25, 55, 3, '2009-02-25'),
-(05, 'GAMBHIR', 13220,  24, 80, 6,  '2005-02-25'),
-(06, 'DHAWAN', 12220,  19,69,8, '2001-02-25');
+insert into ODI_BATSMAN(PLAYER_ID, PLAYER_NAME, SCORE, AVG, CENTURY, HALF_CENTURY, DEBUTE_YEAR)
+VALUES (01, 'SACHIN', 32000, 44.5,  53, 95,2000),
+(02, 'DHONI', 15220, 44.5,  13, 80, 2004),
+(03, 'KOHLI', 18220, 44.5,  35, 50, 2008),
+(04, 'rOHIT', 13220, 44.5, 25, 55, 2009),
+(05, 'GAMBHIR', 13220,44.5,  24, 80, 2005),
+(06, 'DHAWAN', 12220, 44.5,  19,69, 2001);
 
-select * FROM T20;
+RESULT------
+13:31:34	insert into ODI_BATSMAN(PLAYER_ID, PLAYER_NAME, SCORE, AVG, CENTURY, HALF_CENTURY, DEBUTE_YEAR) VALUES (01, 'SACHIN', 32000, 44.5,  53, 95,2000), (02, 'DHONI', 15220, 44.5,  13, 80, 2004), (03, 'KOHLI', 18220, 44.5,  35, 50, 2008), (04, 'rOHIT', 13220, 44.5, 25, 55, 2009), (05, 'GAMBHIR', 13220,44.5,  24, 80, 2005), (06, 'DHAWAN', 12220, 44.5,  19,69, 2001)	6 row(s) affected Records: 6  Duplicates: 0  Warnings: 0	0.359 sec
 
-PLAYER_ID,PLAYER_NAME,SCORE,CENTURY,HALF_CENTURY,DEBUT_DAY
-1,SACHIN,32000,53,95,2000-02-25
-2,DHONI,15220,13,80,2004-02-25
-3,KOHLI,18220,35,50,2008-02-25
-4,rOHIT,13220,25,55,2009-02-25
-5,GAMBHIR,13220,24,80,2005-02-25
-6,DHAWAN,12220,19,69,2001-02-25
+
+
