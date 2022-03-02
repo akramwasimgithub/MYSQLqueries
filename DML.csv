@@ -1,0 +1,74 @@
+create table ODI_BOWLER(
+PLAYER_ID int primary key auto_increment,
+PLAYER_NAME varchar(40) NOT NULL,
+IPL_TEAM varchar(20) NOT null default 'MI',
+WICKET int
+);
+insert into odi_bowler(PLAYER_ID, PLAYER_NAME,IPL_TEAM,WICKET) value(01,'ZAHIR KHAN','PUNJAB' ,400);
+select * FROM odi_bowler;
+INSERT INTO odi_bowler (`PLAYER_NAME`, `IPL_TEAM`, `WICKET`) VALUES ('NARINE', 'KKR', '200');
+INSERT INTO odi_bowler(`PLAYER_NAME`, `WICKET`) VALUES ('BUMRAH', '250');
+
+PLAYER_ID,PLAYER_NAME,IPL_TEAM,WICKET
+1,"ZAHIR KHAN",PUNJAB,400
+2,NARINE,KKR,200
+3,BUMRAH,MI,250
+
+create table W_KEEPER(RUN int NOT NULL,ROLE  enum('BATING','KEEPING','CAPTAIN'), TEAM varchar(10) default 'CSK');
+insert into W_KEEPER(RUN,ROLE,NAME)value(7000,'BATING','AB DeVELLIERS');
+insert into W_KEEPER(RUN,ROLE,NAME)value(7000,'BATING','DHONI');
+insert into W_KEEPER(RUN,ROLE,NAME)value(7000,'BOWLING','KARTIK');
+
+RESULT----
+22:09:28	insert into W_KEEPER(RUN,ROLE,NAME)value(7000,'BOWLING','KARTIK')	Error Code: 1265. Data truncated for column 'ROLE' at row 1	0.016 sec
+
+
+create table PLAYER(NAME varchar(20) not NULL,
+ PID int primary key, 
+ FOOD varchar(20));
+ 
+ INSERT INTO PLAYER (`NAME`, `PID`, `FOOD`) VALUES ('DHONI', '07', 'SALAD');
+INSERT INTO PLAYER(`NAME`, `PID`, `FOOD`) VALUES ('SEHWAG', '03', 'CHICKEN');
+INSERT INTO PLAYER(`NAME`, `PID`, `FOOD`) VALUES ('VIRAT', '18', 'JUIE');
+
+CREATE TABLE OrdersFOOD  
+(  
+PID int NOT NULL ,
+ORDER_ID int NOT NULL primary KEY,   
+Order_No int NOT NULL,   
+ foreign key (PID) REFERENCES PLAYER (PID)  
+);  
+
+INSERT INTO OrdersFOOD(`PID`, `ORDER_ID`, `Order_No`) VALUES ('03', '01', '5555');
+INSERT INTO OrdersFOOD (`PID`, `ORDER_ID`, `Order_No`) VALUES ('03', '02', '4444');
+INSERT INTO OrdersFOOD (`PID`, `ORDER_ID`, `Order_No`) VALUES ('07', '04', '7777');
+INSERT INTO OrdersFOOD (`PID`, `ORDER_ID`, `Order_No`) VALUES ('18', '08', '5555');
+
+ select * from OrdersFOOD;
+ 
+ update ORDERSFOOD SET PID=7
+ WHERE ORDER_ID =1;
+
+update ORDERSFOOD SET PID=3,ORDER_NO=0000
+ WHERE ORDER_ID =1;
+ delete from ORDERSFOOD WHERE PID=18;
+delete from ORDERSFOOD order by ORDER_ID desc limit 2;
+
+select ORDER_ID FROM ORDERSFOOD;
+select ORDER_ID,PID FROM ORDERSFOOD;
+select ORDER_ID,PID FROM ORDERSFOOD WHERE PID=3;
+ select * from OrdersFOOD where PID IN(3,7);
+
+RESULT-----
+23:04:48	update ORDERSFOOD SET PID=7  WHERE ORDER_ID =1	1 row(s) affected Rows matched: 1  Changed: 1  Warnings: 0	0.156 sec
+23:07:19	update ORDERSFOOD SET PID=3,ORDER_NO=0000  WHERE ORDER_ID =1	1 row(s) affected Rows matched: 1  Changed: 1  Warnings: 0	0.328 sec
+23:19:42	delete from ORDERSFOOD WHERE PID=18	1 row(s) affected	0.297 sec
+23:28:28	delete from ORDERSFOOD order by ORDER_ID desc limit 2	2 row(s) affected	0.688 sec
+23:35:05	select ORDER_ID FROM ORDERSFOOD LIMIT 0, 1000	4 row(s) returned	0.063 sec / 0.000 sec
+
+23:35:36	select ORDER_ID,PID FROM ORDERSFOOD LIMIT 0, 1000	4 row(s) returned	0.000 sec / 0.000 sec
+23:38:25	select ORDER_ID,PID FROM ORDERSFOOD WHERE PID=3 LIMIT 0, 1000	2 row(s) returned	0.000 sec / 0.000 sec
+3	46	23:41:58	select * from OrdersFOOD where PID IN(3,7) LIMIT 0, 1000	4 row(s) returned	0.000 sec / 0.000 sec
+
+
+
