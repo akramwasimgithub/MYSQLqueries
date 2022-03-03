@@ -1,0 +1,78 @@
+use cricket;
+select * from ordersfood;
+select * from player;
+
+select order_id from ordersfood where PID=18;
+select ORDER_ID,ORDER_NO FROM ORDERSFOOD where PID=3;
+select * FROM ORDERSFOOD WHERE ORDER_ID in(2,7);
+select * from ORDERSFOOD group by ORDER_ID;
+select * from ORDERSFOOD group by PID;
+select *,COUNT(*) from ORDERSFOOD group by PID;
+select PID,COUNT(*) from ORDERSFOOD group by PID;
+select PID,ORDER_ID,ORDER_NO FROM ORDERSFOOD group by ORDER_ID;
+
+SELECT * FROM ORDERSFOOD WHERE ORDER_ID=2;
+SELECT * FROM ORDERSFOOD WHERE ORDER_ID>2 AND PID>=3;
+SELECT * FROM ORDERSFOOD WHERE (ORDER_ID>2 AND PID>=3) or PID=3;
+SELECT * FROM ORDERSFOOD WHERE (ORDER_ID>2 AND PID>=3) AND PID=3;
+SELECT distinct PID from ORDERSFOOD;
+SELECT distinct PID from ORDERSFOOD where ORDER_ID =5;
+select ORDER_NO from ORDERSFOOD order by PID ASC;
+select * from ORDERSFOOD order by PID ASC;
+
+select ORDER_NO,PID from ORDERSFOOD 
+order by PID ASC;
+select ORDER_NO from ORDERSFOOD 
+WHERE PID>2 
+order by PID ASC;
+
+alter table ORDERSFOOD
+ADD column PRICE float ;
+INSERT into ORDERSFOOD(ORDER_ID,Order_No,PRICE,PID)value(10,6565,330,10);
+
+select *,sum(PRICE) from ORDERSFOOD
+GROUP BY PID;
+select * from ORDERSFOOD;
+
+select *,min(PRICE) from ORDERSFOOD
+GROUP BY PID;
+
+RESULT----
+
+PID,ORDER_ID,Order_No,PRICE,sum(PRICE)
+1,6,6666,57,57
+3,1,0,24.5,80.9000015258789
+4,7,2222,44,44
+5,8,5555,440.2,440.20001220703125
+7,4,7777,55,202.1999969482422
+10,10,6565,330,330
+18,9,0,17.3,17.299999237060547
+
+select if (200>150,'true','false');
+select if (150>200,'true','false');
+
+select ifnull(null,'hello'); #hello
+select ifnull('hi','hello'); #hi
+
+select nullif(2,1); #2
+select nullif(1,1); #1
+
+select * from odi_batsman;
+select * from odi_batsman where PLAYER_NAME like 'D%';  #result-dhoni,dhawan,DRAVID
+select * from odi_batsman where PLAYER_NAME like 'DH%'; #result-dhoni,dhawan
+select * from odi_batsman where PLAYER_NAME like '%I';  #DHONI,KOHLI
+select * from odi_batsman where PLAYER_NAME like '%A%';  #SACHIN,GAMBHIR,DHAWAN,SHEHWAG,DRAVID
+select * from odi_batsman where PLAYER_NAME not LIKE 'D%'; #SACHIN,KOHLI,rOHIT,GAMBHIR,SHEHWAG
+select * from odi_batsman where PLAYER_ID in(1,5,6);
+
+#1	SACHIN	32000	44.5	53	95	2000
+#5	GAMBHIR	13220	44.5	24	80	2005
+#6	DHAWAN	12220	44.5	19	69	2001
+
+select * from odi_batsman where PLAYER_ID not IN(1,5,6);
+
+select * from odi_batsman where PLAYER_ID =2;
+select * from odi_batsman where PLAYER_ID !=2;
+select * from odi_batsman where PLAYER_ID <> 2;
+
+select * from odi_batsman where SCORE between 15000 and 30000;
